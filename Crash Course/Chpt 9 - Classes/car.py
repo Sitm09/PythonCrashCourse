@@ -1,5 +1,5 @@
 class Car():
-    """A simple attempt to represent a car."""
+    """A class that can be used to represent a car."""
 
     def __init__(self, make, model, year):
         """Initializes attributes to describe a car."""
@@ -31,19 +31,32 @@ class Car():
         """Add the given amount to the odometer reading."""
         self.odometer_reading += miles
 
-
 class ElectricCar(Car):
     """Represents aspects of a car, specific to electric vehicles."""
 
     def __init__(self, make, model, year):
         """Initializes attributes of the parent class."""
         super().__init__(make, model, year)
-        self.battery_size = 70
+        self.battery = Battery()
+
+class Battery():
+    """ A simple attempt to model a battery for an electric car."""
+
+    def __init__(self, battery_size=70):
+        """Initialize the battery's attributes."""
+        self.battery_size = battery_size
 
     def describe_battery(self):
         """Prints a statement about the battery size"""
         print("This car has a " + str(self.battery_size) + "-kWh battery.")
 
-my_tesla = ElectricCar('tesla', 'model s', 2016)
-print(my_tesla.get_descriptive_name())
-my_tesla.describe_battery()
+    def get_range(self):
+        """Print a statement about the range the battery provides."""
+        if self.battery_size == 70:
+            range = 240
+        elif self.battery_size == 86:
+            range == 270
+
+        message = "This car can go approximately " + str(range)
+        message += " miles on a full charge."
+        print(message)
